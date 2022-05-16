@@ -4,8 +4,8 @@ import { useState } from "react";
 const addZero = (time) => {
   return time.toString().padStart(2, "0");
 };
-function Timer() {
-  const [timeLeft, setTimeLeft] = useState(2 * 60);
+function Timer({ time, timerInterval, step, num }) {
+  const [timeLeft, setTimeLeft] = useState(time);
   const [isCounting, setIsCounting] = useState(false);
   const [progress, setProgress] = useState(100);
   const minutes = addZero(Math.floor(timeLeft / 60));
@@ -14,12 +14,12 @@ function Timer() {
   useEffect(() => {
     const interval = setInterval(() => {
       isCounting &&
-        setTimeLeft((timeLeft) => (timeLeft >= 1 ? timeLeft - 1 : 0));
+        setTimeLeft((timeLeft) => (timeLeft >= 1 ? timeLeft - step : 0));
       isCounting &&
         setProgress((progress) =>
-          progress >= 1 ? progress - 100 / timeLeft : 0
+          progress >= 1 ? progress - (100 / timeLeft) * num : 0
         );
-    }, 1000);
+    }, timerInterval);
     return () => {
       clearInterval(interval);
     };
