@@ -1,0 +1,14 @@
+.block{
+    width: 41cm;
+    height:3cm;
+    background-color: blue;
+}
+.progress-loader{
+    background-color: blue;
+    color: blue;
+}
+
+.time{
+
+    font-size:1cm;
+}
